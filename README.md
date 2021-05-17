@@ -10,6 +10,6 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.tim91G:SliderPickerLibrary:1.0.0'
+    implementation 'com.github.tim91G:SliderPickerLibrary:6d02bde0c4'
 }
 ```
