@@ -10,6 +10,8 @@ This library includes a custom `LayoutManager` for Android's Recyclerview to pro
 * callback method which is called at a customizable interval to update your UI
 * prevent an overscrolling issue when using smoothscroll by implementing a custom `LinearSmoothScroller`
 
+![sliderpicker](https://user-images.githubusercontent.com/12411940/118711068-6a309d80-b81f-11eb-8ea8-f4aa39f5a3b0.gif)
+
 
 ## Download
 
