@@ -47,11 +47,11 @@ Using the library is fairly easy. add `import com.mittylabs.sliderpickerlibrary.
 * add setOnScrollListener to provide a callback for the selected position with optional custom update interval
     * `.setOnScrollListener { index -> textView.text = index.toString() }`
     * `.setOnScrollListener(100) { ... }`
-* This will set the initial index. (You need to handle rotation caching yourself)
+* This will set the initial index. (You need to handle rotations yourself)
     * `.setInitialIndex(0)`
 * This will smoothscroll to the corresponding index without overshooting with smaller itemviews
     * `sliderLayoutManager.smoothScroll(20) `
-* The library provides two center scalling effects. You can apply this effect by calling `setScaling` and provide either
+* The library provides two center scalling effects. You can apply this by calling `setScaling` and provide either
     * `SliderLayoutManager.Scaling.Logarithmic(0.5f)` 
     * `SliderLayoutManager.Scaling.Linear`
 
