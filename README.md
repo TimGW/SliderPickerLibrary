@@ -49,7 +49,7 @@ Using the library is fairly easy. add `import com.mittylabs.sliderpickerlibrary.
 * This will set the initial index. (You need to handle rotation caching yourself)
     * `.setInitialIndex(0)`
 * This will smoothscroll to the corresponding index without overshooting with smaller itemviews
-    * `sliderLayoutManager.smoothScroll(recyclerView, 20) `
+    * `sliderLayoutManager.smoothScroll(20) `
 * The library provides two center scalling effects. You can apply this effect by calling `setScaling` and provide either
     * `SliderLayoutManager.Scaling.Logarithmic(0.5f)` 
     * `SliderLayoutManager.Scaling.Linear`
@@ -70,7 +70,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
     recyclerView.adapter = MainAdapter().apply {
         onItemClick = { index ->
-            sliderLayoutManager.smoothScroll(recyclerView, index) 
+            sliderLayoutManager.smoothScroll(index) 
         }
     }
     
