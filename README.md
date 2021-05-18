@@ -7,7 +7,7 @@ This library includes a custom `LayoutManager` for Android's Recyclerview to pro
 * Snapping to a position when scrolling or flinging the recyclerview and put the item center in the recyclerview center
 * Use both in horizontally or vertically orientation
 * optional scaling effect to increase the size of centered items
-* callback method which is called at an interval to update your UI
+* callback method which is called at a customizable interval to update your UI
 * prevent an overscrolling issue when using smoothscroll by implementing a custom `LinearSmoothScroller`
 
 
@@ -44,8 +44,9 @@ Using the library is fairly easy. add `import com.mittylabs.sliderpickerlibrary.
 
 * Support for both horizontal or vertical orientation
     * `SliderLayoutManager.Builder(this, RecyclerView.HORIZONTAL)`
-* add setOnScrollListener to provide a callback for the selected position
+* add setOnScrollListener to provide a callback for the selected position with optional custom update interval
     * `.setOnScrollListener { index -> textView.text = index.toString() }`
+    * `.setOnScrollListener(100) { ... }`
 * This will set the initial index. (You need to handle rotation caching yourself)
     * `.setInitialIndex(0)`
 * This will smoothscroll to the corresponding index without overshooting with smaller itemviews
