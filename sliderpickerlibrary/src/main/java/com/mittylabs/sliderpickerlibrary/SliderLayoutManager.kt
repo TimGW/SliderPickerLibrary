@@ -19,13 +19,14 @@ class SliderLayoutManager private constructor(
     private val initialIndex: Int = 0,
     private val onScrollListener: OnScrollListener? = null,
     private val scaling: Scaling? = null,
+    private val updateInterval: Long = DEFAULT_DRAGGING_UPDATE_INTERVAL_MS
 ) : LinearLayoutManager(context, sliderOrientation, false) {
     private lateinit var recyclerView: RecyclerView
     private var currentPosition = 0
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
         override fun run() {
-            handler.postDelayed(this, DRAGGING_UPDATE_INTERVAL_MS)
+            handler.postDelayed(this, updateInterval)
             calculateCenterIndex()
         }
     }
@@ -165,14 +166,9 @@ class SliderLayoutManager private constructor(
         }
     }
 
-    fun smoothScroll(recyclerView: RecyclerView?, position: Int) {
+    fun smoothScroll(position: Int) {
         if (currentPosition == position) return
         smoothScrollToPosition(recyclerView, RecyclerView.State(), position)
-    }
-
-    sealed class Scaling {
-        object Linear : Scaling()
-        data class Logarithmic(val multiplier: Float = 1.0F) : Scaling()
     }
 
     private class CenterSmoothScroller(
@@ -187,11 +183,17 @@ class SliderLayoutManager private constructor(
         ) = boxStart + (boxEnd - boxStart) / HALF_INT - (viewStart + (viewEnd - viewStart) / HALF_INT)
     }
 
+    sealed class Scaling {
+        object Linear : Scaling()
+        data class Logarithmic(val multiplier: Float = 1.0F) : Scaling()
+    }
+
     data class Builder(
         val context: Context,
         @RecyclerView.Orientation val orientation: Int
     ) {
         private var initialIndex: Int = 0
+        private var updateInterval: Long = DEFAULT_DRAGGING_UPDATE_INTERVAL_MS
         private var onScrollListener: OnScrollListener? = null
         private var scaling: Scaling? = null
 
@@ -199,19 +201,26 @@ class SliderLayoutManager private constructor(
             this.initialIndex = initialIndex
         }
 
-        fun setOnScrollListener(onScrollListener: OnScrollListener) = apply {
+        fun setOnScrollListener(
+            updateInterval: Long = DEFAULT_DRAGGING_UPDATE_INTERVAL_MS,
+            onScrollListener: OnScrollListener
+        ) = apply {
             this.onScrollListener = onScrollListener
+            this.updateInterval = updateInterval
         }
 
         fun setScaling(scaling: Scaling) = apply {
             this.scaling = scaling
         }
 
-        fun build() = SliderLayoutManager(context, orientation, initialIndex, onScrollListener, scaling)
+        fun build() = SliderLayoutManager(
+            context, orientation, initialIndex,
+            onScrollListener, scaling, updateInterval
+        )
     }
 
     companion object {
-        private const val DRAGGING_UPDATE_INTERVAL_MS = 50L
+        private const val DEFAULT_DRAGGING_UPDATE_INTERVAL_MS = 50L
         private const val HALF = 2F
         private const val HALF_INT = HALF.toInt()
     }

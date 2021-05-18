@@ -16,12 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         val sliderLayoutManager = SliderLayoutManager.Builder(this, RecyclerView.HORIZONTAL)
                 .setInitialIndex(0)
-                .setOnScrollListener { tv.text = it.toString() }
+                .setOnScrollListener(50L) { tv.text = it.toString() }
                 .setScaling(SliderLayoutManager.Scaling.Logarithmic(0.6f))
                 .build()
 
         rv.adapter = MainAdapter().apply {
-            onItemClick = { sliderLayoutManager.smoothScroll(rv, it) }
+            onItemClick = { sliderLayoutManager.smoothScroll(it) }
         }
         rv.layoutManager = sliderLayoutManager
     }
