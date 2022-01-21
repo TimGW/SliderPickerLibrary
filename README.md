@@ -36,7 +36,7 @@ Add the following code to the module level `build.gradle` file
 ```groovy
 
 dependencies {
-    implementation "com.github.tim91G:SliderPickerLibrary:$latest"
+    implementation "com.github.TimGW:SliderPickerLibrary:$latest"
 }
 ```
 
